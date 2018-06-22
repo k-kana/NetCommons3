@@ -113,6 +113,11 @@ $Dispatcher->dispatch(
 );
 
 //以下、デバッグの出力
+// css、js等の拡張子付きのファイルは計測しない
+if (strrpos($_SERVER['REDIRECT_URL'], '.') !== false) {
+	return;
+}
+
 App::uses('DebugTimer', 'DebugKit.Lib');
 
 $requestTime = DebugTimer::requestTime();
