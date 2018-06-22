@@ -105,6 +105,13 @@ if (preg_match('/' . preg_quote('action=common_download_main', '/') . '/', $_SER
 	return;
 }
 
+App::uses('Dispatcher', 'Routing');
+$Dispatcher = new Dispatcher();
+$Dispatcher->dispatch(
+	new CakeRequest(),
+	new CakeResponse()
+);
+
 //以下、デバッグの出力
 App::uses('DebugTimer', 'DebugKit.Lib');
 
