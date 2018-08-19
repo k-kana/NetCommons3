@@ -17,10 +17,20 @@
             "app/Plugin/{$name}": ["type:cakephp-plugin"]
         }
     },
+    "repositories": [
+        {"type": "vcs", "url": "https://github.com/s-nakajima/BigDataRegistrations.git"}
+    ],
     "require": {
         "cakephp/cakephp":              "~2.10@stable",
         "netcommons/install":           "@stable",
-        "jms/serializer":               "1.1.0@stable"
+        "jms/serializer":               "1.1.0@stable",
+        "s-nakajima/big-data-ragistrations": "dev-speedup2",
+        "netcommons/boxes": "dev-speedup2",
+        "netcommons/calendars": "dev-speedup2",
+        "netcommons/menus": "dev-speedup2",
+        "netcommons/net-commons": "dev-speedup2",
+        "netcommons/pages": "dev-speedup2",
+        "netcommons/rooms": "dev-speedup2"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer":  "~1.0@stable",
