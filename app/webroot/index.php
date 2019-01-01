@@ -108,25 +108,25 @@ if (preg_match('/' . preg_quote('action=common_download_main', '/') . '/', $_SER
 }
 
 //$result = false;
-$result = include (__DIR__ . DS . 'css.php');
-if (! $result) {
-	$result = include (__DIR__ . DS . 'js.php');
-}
-if (! $result) {
+//$result = include (__DIR__ . DS . 'css.php');
+//if (! $result) {
+//	$result = include (__DIR__ . DS . 'js.php');
+//}
+//if (! $result) {
 	App::uses('Dispatcher', 'Routing');
 	$Dispatcher = new Dispatcher();
 	$Dispatcher->dispatch(
 		new CakeRequest(),
 		new CakeResponse()
 	);
-}
+//}
 
 //以下、デバッグの出力
 // css、js等の拡張子付きのファイルは計測しない
-if (strrpos($_SERVER['REDIRECT_URL'], '.') !== false ||
-		preg_match('/' . preg_quote('/avatar/', '/') . '/', $_SERVER['REDIRECT_URL'])) {
-	return;
-}
+//if (strrpos($_SERVER['REDIRECT_URL'], '.') !== false ||
+//		preg_match('/' . preg_quote('/avatar/', '/') . '/', $_SERVER['REDIRECT_URL'])) {
+//	return;
+//}
 
 App::uses('DebugTimer', 'DebugKit.Lib');
 
