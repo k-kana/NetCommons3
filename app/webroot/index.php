@@ -109,6 +109,13 @@ if (preg_match('/' . preg_quote('action=common_download_main', '/') . '/', $_SER
 	return;
 }
 
+CakeLog::config('sqldump', array(
+	'engine' => 'File',
+	'types' => array('sqldump'),
+	'file' => 'sqldump-' . date('Ymd') . '-' . microtime(true),
+));
+CakeLog::write('sqldump', $_SERVER['REDIRECT_URL']);
+
 //$result = false;
 //$result = include (__DIR__ . DS . 'css.php');
 //if (! $result) {
@@ -122,6 +129,10 @@ if (preg_match('/' . preg_quote('action=common_download_main', '/') . '/', $_SER
 		new CakeResponse()
 	);
 //}
+
+App::uses('ConnectionManager', 'Model');
+$db = ConnectionManager::getDataSource('master');
+CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
 
 //以下、デバッグの出力
 // css、js等の拡張子付きのファイルは計測しない
