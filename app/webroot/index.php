@@ -109,11 +109,14 @@ if (preg_match('/' . preg_quote('action=common_download_main', '/') . '/', $_SER
 	return;
 }
 
-CakeLog::config('sqldump', array(
-	'engine' => 'File',
-	'types' => array('sqldump'),
-	'file' => 'sqldump-' . date('Ymd') . '-' . microtime(true),
-));
+$config = Spyc::YAMLLoad(APP . 'Config' . DS . 'application.yml');
+if ($config['debug'] > 0) {
+	CakeLog::config('sqldump', array(
+		'engine' => 'File',
+		'types' => array('sqldump'),
+		'file' => 'sqldump-' . date('Ymd') . '-' . microtime(true),
+	));
+}
 CakeLog::write('sqldump', $_SERVER['REDIRECT_URL']);
 
 //$result = false;
