@@ -71,6 +71,7 @@ if (empty($this->request->params['requested'])) {
 	CakeLog::debug("");
 	CakeLog::debug("");
 	CakeLog::debug("=========================================");
+	CakeLog::write('sqldump', "=========================================");
 }
 $db = ConnectionManager::getDataSource('master');
 CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
