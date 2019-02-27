@@ -20,6 +20,7 @@
 
 App::uses('NetCommonsAppController', 'NetCommons.Controller');
 App::uses('DebugTimer', 'DebugKit.Lib');
+App::uses('ConnectionManager', 'Model');
 
 /**
  * Application Controller for NetCommons
@@ -56,6 +57,39 @@ class AppController extends NetCommonsAppController {
 	}
 
 /**
+ * beforeFilter
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+
+		//カレントデータセット
+if (empty($this->request->params['requested'])) {
+	CakeLog::debug("");
+	CakeLog::debug("");
+	CakeLog::debug("");
+	CakeLog::debug("");
+	CakeLog::debug("=========================================");
+}
+$db = ConnectionManager::getDataSource('master');
+CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
+
+$this->__key = md5(json_encode($this->request->params) . json_encode($this->request->params) . json_encode($this->request->data));
+CakeLog::write('sqldump', '##### ' . var_export($this->__key, true));
+CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
+CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
+CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
+
+CakeLog::debug('##### ' . var_export($this->__key, true));
+CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
+CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
+CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
+
+$this->_startTime = microtime(true);
+	}
+
+/**
  * Called after the controller action is run and rendered.
  *
  * @return void
@@ -63,10 +97,21 @@ class AppController extends NetCommonsAppController {
  */
 	public function afterFilter() {
 		parent::afterFilter();
+
 		//TODO: 測定用に追加。最後、削除する
 		if (!empty($this->request) && empty($this->request->params['requested'])) {
 			DebugTimer::stop('plugin_timer_here');
 		}
+
+$endTime = microtime(true);
+CakeLog::debug('##### ' . var_export($this->__key, true));
+CakeLog::debug(__METHOD__ . '(' . __LINE__ . ')  ' . var_export(($endTime - $this->_startTime), true));
+CakeLog::debug("--------");
+
+$db = ConnectionManager::getDataSource('master');
+CakeLog::write('sqldump', '##### ' . var_export($this->__key, true));
+CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
+CakeLog::write('sqldump', "--------");
 	}
 
 }
