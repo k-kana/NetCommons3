@@ -17,6 +17,8 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+define('TIME_START', microtime(true));
+
 /**
  * Use the DS to separate the directories in other defines
  */
