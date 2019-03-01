@@ -118,6 +118,21 @@ if ($config['debug'] > 0) {
 		'path' => LOGS . 'sql_dump' . DS,
 	));
 }
+
+CakeLog::config('debug-kit-datetime', array(
+	'engine' => 'File',
+	'types' => array('debug-kit'),
+	'file' => 'debug-kit-' . date('Ymd') . '-' . microtime(true),
+	'path' => LOGS . 'debug-kit' . DS,
+));
+
+CakeLog::config('debug-kit', array(
+	'engine' => 'File',
+	'types' => array('debug-kit'),
+	'file' => 'debug-kit-' . date('Ymd'),
+	'path' => LOGS . 'debug-kit' . DS,
+));
+
 CakeLog::write('sqldump', $_SERVER['REDIRECT_URL']);
 
 //$result = false;
@@ -150,13 +165,6 @@ App::uses('DebugTimer', 'DebugKit.Lib');
 $requestTime = DebugTimer::requestTime();
 $otherEnd = microtime(true) - DebugTimer::requestStartTime();
 $existing = DebugTimer::getAll();
-
-CakeLog::config('debug-kit', array(
-	'engine' => 'File',
-	'types' => array('debug-kit'),
-	'file' => 'debug-kit-' . date('Ymd'),
-	'path' => LOGS . 'debug-kit' . DS,
-));
 
 $otherStart = 0;
 $pluginTotalTime = 0;
