@@ -115,6 +115,7 @@ if ($config['debug'] > 0) {
 		'engine' => 'File',
 		'types' => array('sqldump'),
 		'file' => 'sqldump-' . date('Ymd') . '-' . microtime(true),
+		'path' => LOGS . 'sql_dump' . DS,
 	));
 }
 CakeLog::write('sqldump', $_SERVER['REDIRECT_URL']);
@@ -154,6 +155,7 @@ CakeLog::config('debug-kit', array(
 	'engine' => 'File',
 	'types' => array('debug-kit'),
 	'file' => 'debug-kit-' . date('Ymd'),
+	'path' => LOGS . 'debug-kit' . DS,
 ));
 
 $otherStart = 0;

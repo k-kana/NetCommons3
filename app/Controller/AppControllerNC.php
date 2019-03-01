@@ -62,9 +62,8 @@ class AppController extends NetCommonsAppController {
  * @return void
  */
 	public function beforeFilter() {
-		parent::beforeFilter();
+		$this->Components->unload('DebugKit.Toolbar');
 
-		//カレントデータセット
 if (empty($this->request->params['requested'])) {
 	CakeLog::debug("");
 	CakeLog::debug("");
@@ -88,6 +87,8 @@ CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->q
 CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
 
 $this->_startTime = microtime(true);
+
+		parent::beforeFilter();
 	}
 
 /**
