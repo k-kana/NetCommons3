@@ -76,25 +76,57 @@ if (empty($this->request->params['requested'])) {
 	$indent = '  ';
 }
 
-
 $db = ConnectionManager::getDataSource('master');
 CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' .
 		preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
 
-$this->__key = md5(json_encode($this->request->params) . json_encode($this->request->params) . json_encode($this->request->data));
+$this->__key = md5(json_encode($this->request->params) .
+		json_encode($this->request->params) . json_encode($this->request->data));
 CakeLog::write('sqldump', $indent . '##### ' . var_export($this->__key, true));
-CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
-CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
-CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		var_export($this->request->params, true));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		var_export($this->request->query, true));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		var_export($this->request->data, true));
 
 CakeLog::debug($indent . '##### ' . var_export($this->__key, true));
-CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
-CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
-CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		var_export($this->request->params, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		var_export($this->request->query, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		var_export($this->request->data, true));
 
-$this->_startTime = microtime(true);
+$this->_startTime = $this->_renderTime = microtime(true);
 
 		parent::beforeFilter();
+	}
+
+/**
+ * Called after the controller action is run, but before the view is rendered. You can use this method
+ * to perform logic or set view variables that are required on every request.
+ *
+ * @return void
+ * @link https://book.cakephp.org/2.0/en/controllers.html#request-life-cycle-callbacks
+ */
+	public function beforeRender() {
+$this->_renderTime = microtime(true);
+if (empty($this->request->params['requested'])) {
+	$indent = '';
+} else {
+	$indent = '  ';
+}
+
+CakeLog::debug($indent . '##### ' . var_export($this->__key, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ')  beforeFilter - beforeRender = Action');
+CakeLog::debug($indent . var_export(($this->_renderTime - $this->_startTime), true));
+
+if (empty($this->request->params['requested'])) {
+	CakeLog::debug($indent . "--------");
+}
+
+		parent::beforeRender();
 	}
 
 /**
@@ -119,7 +151,11 @@ if (empty($this->request->params['requested'])) {
 
 $endTime = microtime(true);
 CakeLog::debug($indent . '##### ' . var_export($this->__key, true));
-CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ')  ' . var_export(($endTime - $this->_startTime), true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ')  beforeRender - afterFilter = Render');
+CakeLog::debug($indent . var_export(($endTime - $this->_renderTime), true));
+CakeLog::debug($indent . '##### ' . var_export($this->__key, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ')  beforeFilter - afterFilter = Total');
+CakeLog::debug($indent . var_export(($endTime - $this->_startTime), true));
 CakeLog::debug($indent . "--------");
 
 $db = ConnectionManager::getDataSource('master');
