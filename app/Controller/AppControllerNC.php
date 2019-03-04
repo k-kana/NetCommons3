@@ -71,20 +71,26 @@ if (empty($this->request->params['requested'])) {
 	CakeLog::debug("");
 	CakeLog::debug("=========================================");
 	CakeLog::write('sqldump', "=========================================");
+	$indent = '';
+} else {
+	$indent = '  ';
 }
+
+
 $db = ConnectionManager::getDataSource('master');
-CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
 
 $this->__key = md5(json_encode($this->request->params) . json_encode($this->request->params) . json_encode($this->request->data));
-CakeLog::write('sqldump', '##### ' . var_export($this->__key, true));
-CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
-CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
-CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
+CakeLog::write('sqldump', $indent . '##### ' . var_export($this->__key, true));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
 
-CakeLog::debug('##### ' . var_export($this->__key, true));
-CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
-CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
-CakeLog::debug(__METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
+CakeLog::debug($indent . '##### ' . var_export($this->__key, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->params, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->query, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($this->request->data, true));
 
 $this->_startTime = microtime(true);
 
@@ -105,15 +111,22 @@ $this->_startTime = microtime(true);
 			DebugTimer::stop('plugin_timer_here');
 		}
 
+if (empty($this->request->params['requested'])) {
+	$indent = '';
+} else {
+	$indent = '  ';
+}
+
 $endTime = microtime(true);
-CakeLog::debug('##### ' . var_export($this->__key, true));
-CakeLog::debug(__METHOD__ . '(' . __LINE__ . ')  ' . var_export(($endTime - $this->_startTime), true));
-CakeLog::debug("--------");
+CakeLog::debug($indent . '##### ' . var_export($this->__key, true));
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ')  ' . var_export(($endTime - $this->_startTime), true));
+CakeLog::debug($indent . "--------");
 
 $db = ConnectionManager::getDataSource('master');
-CakeLog::write('sqldump', '##### ' . var_export($this->__key, true));
-CakeLog::write('sqldump', __METHOD__ . '(' . __LINE__ . ') ' . preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
-CakeLog::write('sqldump', "--------");
+CakeLog::write('sqldump', $indent . '##### ' . var_export($this->__key, true));
+CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' .
+		preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
+CakeLog::write('sqldump', $indent . "--------");
 	}
 
 }
