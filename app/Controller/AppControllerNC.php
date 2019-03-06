@@ -65,10 +65,6 @@ class AppController extends NetCommonsAppController {
 		$this->Components->unload('DebugKit.Toolbar');
 
 if (empty($this->request->params['requested'])) {
-	CakeLog::debug("");
-	CakeLog::debug("");
-	CakeLog::debug("");
-	CakeLog::debug("");
 	CakeLog::debug("=========================================");
 	CakeLog::write('sqldump', "=========================================");
 	$indent = '';
@@ -163,6 +159,15 @@ CakeLog::write('sqldump', $indent . '##### ' . var_export($this->__key, true));
 CakeLog::write('sqldump', $indent . __METHOD__ . '(' . __LINE__ . ') ' .
 		preg_replace("/" . preg_quote("\\'", '/') . "/", "'", var_export($db->getLog(), true)));
 CakeLog::write('sqldump', $indent . "--------");
+
+
+if (empty($this->request->params['requested'])) {
+	CakeLog::debug("");
+	CakeLog::debug("");
+	CakeLog::debug("");
+	CakeLog::debug("");
+}
+
 	}
 
 }
