@@ -31,7 +31,9 @@
         "netcommons/rooms": "dev-improve_performance_current",
         "netcommons/boxes": "dev-improve_performance_current",
         "netcommons/menus": "dev-improve_performance_current",
-        "netcommons/nc2-to-nc3": "dev-improve_performance_current"
+        "netcommons/nc2-to-nc3": "dev-improve_performance_current",
+        "netcommons/files": "dev-improve_performance_current",
+        "netcommons/wysiwyg": "dev-improve_performance_current"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer":  "~1.0@stable",
