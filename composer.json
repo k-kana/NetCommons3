@@ -33,7 +33,22 @@
         "netcommons/menus": "dev-improve_performance_current",
         "netcommons/nc2-to-nc3": "dev-improve_performance_current",
         "netcommons/files": "dev-improve_performance_current",
-        "netcommons/wysiwyg": "dev-improve_performance_current"
+        "netcommons/wysiwyg": "dev-improve_performance_current",
+        "netcommons/workflow": "dev-improve_performance_current",
+        "netcommons/announcements": "dev-improve_performance_current",
+        "netcommons/auth": "dev-improve_performance_current",
+        "netcommons/authorization-keys": "dev-improve_performance_current",
+        "netcommons/cabinets": "dev-improve_performance_current",
+        "netcommons/bbses": "dev-improve_performance_current",
+        "netcommons/blogs": "dev-improve_performance_current",
+        "netcommons/calendars": "dev-improve_performance_current",
+        "netcommons/content-comments": "dev-improve_performance_current",
+        "netcommons/faqs": "dev-improve_performance_current",
+        "netcommons/links": "dev-improve_performance_current",
+        "netcommons/quizzes": "dev-improve_performance_current",
+        "netcommons/reservations": "dev-improve_performance_current",
+        "netcommons/tasks": "dev-improve_performance_current",
+        "netcommons/videos": "dev-improve_performance_current"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer":  "~1.0@stable",
