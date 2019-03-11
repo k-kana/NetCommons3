@@ -49,7 +49,10 @@
         "netcommons/reservations": "dev-improve_performance_current",
         "netcommons/tasks": "dev-improve_performance_current",
         "netcommons/videos": "dev-improve_performance_current",
-        "netcommons/users": "dev-improve_performance_current"
+        "netcommons/users": "dev-improve_performance_current",
+        "netcommons/photo-albums": "dev-improve_performance_current",
+        "netcommons/questionnaires": "dev-improve_performance_current",
+        "netcommons/registrations": "dev-improve_performance_current"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer":  "~1.0@stable",
